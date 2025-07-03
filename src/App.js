@@ -1,13 +1,12 @@
 import './App.css';
-
+import Signup from './AuthenticationComponents/Signup';
+//import { BrowserRouter,Router,Route } from 'react-router-dom';
+import NavigationBar from './Navbar/NavigationBar';
 function App() {
   return (
     <>
-      <h1>Hello world</h1>
-      <p>This is a simple React application.</p>
-      <p>Welcome to the React world!</p>
-      <p>Enjoy coding with React!</p>
-      <p>Let's build something amazing together!</p>  
+    <NavigationBar />
+    <Signup />
     </>
   );
 }

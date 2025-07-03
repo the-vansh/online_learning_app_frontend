@@ -1,0 +1,217 @@
+/* Background */
+.signupContainer {
+  width: 100%;
+  max-width: 480px;
+  margin: 60px auto;
+  background: #fefefe;
+  border-radius: 16px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  font-family: 'Poppins', sans-serif;
+  animation: fadeIn 0.6s ease;
+}
+
+/* Form toggle buttons */
+.formToggle {
+  display: flex;
+  background: linear-gradient(to right, #4facfe, #00f2fe);
+}
+
+.formToggle button {
+  flex: 1;
+  padding: 14px 0;
+  font-size: 16px;
+  border: none;
+  outline: none;
+  color: #fff;
+  background: transparent;
+  cursor: pointer;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.formToggle button:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.formToggle button.active {
+  background: #ffffff;
+  color: #0077b6;
+  font-weight: 600;
+  border-bottom: 3px solid #0077b6;
+}
+
+/* Sliding Form Animation */
+.formSlider {
+  display: flex;
+  width: 200%;
+  transition: transform 0.5s ease-in-out;
+}
+
+.slideLeft {
+  transform: translateX(-50%);
+}
+
+/* Forms */
+.signupForm {
+  width: 50%;
+  padding: 30px 25px;
+  box-sizing: border-box;
+  background: #ffffff;
+}
+
+.signupForm h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #0077b6;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+/* Input fields */
+.signupForm .inputWrapper {
+  display: flex;
+  align-items: center;
+  margin: 12px 0;
+  background: #f1f5f9;
+  border-radius: 8px;
+  padding: 10px 12px;
+  transition: box-shadow 0.3s ease;
+}
+
+.signupForm .inputWrapper:focus-within {
+  box-shadow: 0 0 0 3px rgba(0, 119, 182, 0.3);
+}
+
+.signupForm .inputIcon {
+  color: #0077b6;
+  margin-right: 8px;
+}
+
+.signupForm input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 15px;
+}
+
+/* File Upload Label */
+.fileUploadLabel {
+  display: block;
+  margin: 15px 0 5px;
+  font-size: 14px;
+  color: #555;
+}
+
+.fileInput {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  border: 1px dashed #0077b6;
+  border-radius: 8px;
+  background: #f0faff;
+  cursor: pointer;
+}
+
+.fileInput:hover {
+  border-color: #00b4d8;
+}
+
+/* Image Preview */
+.previewContainer {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.previewImage {
+  max-width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #0077b6;
+  box-shadow: 0 5px 10px rgba(0, 119, 182, 0.2);
+}
+
+/* Submit Button */
+.signupForm button {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(135deg, #0077b6, #00b4d8);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 15px;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.signupForm button:hover {
+  background: linear-gradient(135deg, #005f8c, #0096c7);
+  transform: scale(1.02);
+}
+
+.signupForm button:disabled {
+  background: #b0c4de;
+  cursor: not-allowed;
+}
+
+/* Spinner */
+.spinner {
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #fff;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  animation: spin 0.8s linear infinite;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .signupContainer {
+    max-width: 95%;
+    margin: 20px auto;
+  }
+
+  .signupForm h2 {
+    font-size: 20px;
+  }
+
+  .signupForm .inputWrapper {
+    padding: 8px 10px;
+  }
+
+  .signupForm input {
+    font-size: 14px;
+  }
+
+  .signupForm button {
+    font-size: 15px;
+    padding: 10px;
+  }
+
+  .formToggle button {
+    font-size: 14px;
+    padding: 10px 0;
+  }
+}
