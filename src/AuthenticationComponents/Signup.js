@@ -1,21 +1,42 @@
 import React from 'react'
 import { useState } from 'react';
 import styles from './Signup.module.css';
-import { FaUser, FaEnvelope, FaLock, FaPhone, FaUniversity, FaGraduationCap, FaVenusMars, FaImage } from 'react-icons/fa';
+import ResultPanel from '../SharedComponents/ResultPanel';
+import { useNavigate } from "react-router-dom";
+import { FaUser, FaEnvelope, FaLock, FaPhone, FaUniversity, FaGraduationCap, FaVenusMars, FaImage, FaBriefcase,FaBuilding } from 'react-icons/fa';
+import uploadToCloudinary from '../CenteralApiHandler/Cloudapi';
+import api from '../CenteralApiHandler/Api'; 
+
 
 export default function Signup() {
     const [learnerFormData, setLearnerFormData] = useState({});
     const [professorFormData, setProfessorFormData] = useState({});
     const [loading, setLoading] = useState(false);
-    const [previewImage, setPreviewImage] = useState(null);
+    const [learnerPreviewImage, setLearnerPreviewImage] = useState(null);
+    const [professorpreviewImage, setProfessorPreviewImage] = useState(null);
     const [activeForm, setActiveForm] = useState("learner");
+    const [showResultPanel, setShowResultPanel] = useState(false);
+    const [resultMessage, setResultMessage] = useState(""); // Success/error text
+    const [isSuccess, setIsSuccess] = useState(false);
+    const navigate = useNavigate();
+
 
     const handleChange = (e) => {
     const { name, value, type, files } = e.target;
 
     // Choose which form to update based on activeForm
     if (activeForm === "learner") {
-        setLearnerFormData({ ...learnerFormData, [name]: value });
+        if(type=== "file") {
+            const file = files[0];
+            setLearnerFormData({ ...learnerFormData, [name]: file });
+            if (file) {
+                const reader = new FileReader();
+                reader.onloadend = () => setLearnerPreviewImage(reader.result);
+                reader.readAsDataURL(file);
+            }
+        } else {
+          setLearnerFormData({ ...learnerFormData, [name]: value });
+        }
     } else if (activeForm === "professor") {
         if (type === "file") {
         const file = files[0];
@@ -23,7 +44,7 @@ export default function Signup() {
 
         if (file) {
             const reader = new FileReader();
-            reader.onloadend = () => setPreviewImage(reader.result);
+            reader.onloadend = () => setProfessorPreviewImage(reader.result);
             reader.readAsDataURL(file);
         }
         } else {
@@ -32,15 +53,62 @@ export default function Signup() {
     }
     };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    const formData = activeForm === "learner" ? learnerFormData : professorFormData;
     setLoading(true);
+    let imageUrl = ""; 
+    let formData =
+      activeForm === "learner" ? { ...learnerFormData } : { ...professorFormData };
 
-    setTimeout(() => {
-      console.log("Form Data:", formData);
+    try {
+      imageUrl = await uploadToCloudinary(formData.profileImage, "image");
+      console.log("Image uploaded:", imageUrl);
+    } catch (error) {
+      console.error("Cloudinary upload failed:", error);
+      alert("Server Error Please try again later.");
       setLoading(false);
-    }, 2000);
+      return;
+    }
+    if (activeForm === "learner") {
+      formData.learnerImageUrl = imageUrl;
+    } else {
+      formData.professorImageUrl = imageUrl;
+      formData.status="Pending";
+    }
+    delete formData.profileImage;
+    
+    try {
+      const response = await api.post(
+        activeForm === "learner"
+          ? "/registerlearner"
+          : "/registerprofessor",
+        formData
+      );
+      console.log("Registration successful:", response.data);
+       setResultMessage(response.data);
+       setIsSuccess(true);
+       setShowResultPanel(true);
+    } catch (error) {
+      console.error("Registration failed:", error);
+
+      if (error.response) {
+        if (error.response.status === 409) {
+          setResultMessage("User already exists with this username!");
+        } else {
+          setResultMessage(
+            error.response.data || "An error occurred during registration."
+          );
+        }
+      } else if (error.request) {
+        setResultMessage("No response from server. Please try again later.");
+      } else {
+        setResultMessage("Something went wrong. Please try again.");
+      }
+      setIsSuccess(false);
+      setShowResultPanel(true);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -77,7 +145,7 @@ export default function Signup() {
             <input
               type="email"
               name="learnerUsername"
-              placeholder="Email"
+              placeholder="Email (Personal Email)"
               value={learnerFormData.learnerUsername || ""}
               onChange={handleChange}
               required
@@ -107,6 +175,39 @@ export default function Signup() {
               required
             />
           </div>
+          <div className={styles.inputWrapper}>
+            <FaVenusMars className={styles.inputIcon} />
+            <input
+              type="text"
+              name="learnerGender"
+              placeholder="Gender"
+              value={learnerFormData.learnerGender || ""}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+           <label className={styles.fileUploadLabel}>
+            <FaImage className={styles.inputIcon} /> Upload Profile Picture:
+            <input
+              type="file"
+              name="profileImage"
+              accept="image/*"
+              onChange={handleChange}
+              className={styles.fileInput}
+            />
+          </label>
+
+          {learnerPreviewImage && (
+            <div className={styles.previewContainer}>
+              <img
+                src={learnerPreviewImage}
+                alt="Preview"
+                className={styles.previewImage}
+              />
+            </div>
+          )}
+
 
           <div className={styles.inputWrapper}>
             <FaLock className={styles.inputIcon} />
@@ -120,7 +221,9 @@ export default function Signup() {
             />
           </div>
 
-        
+          <p className={styles.profileTip}>
+             Once your profile is complete, you’ll have access to a personalized learning journey. 
+          </p>
 
           <button type="submit" disabled={loading}>
             {loading ? (
@@ -175,12 +278,37 @@ export default function Signup() {
           </div>
 
           <div className={styles.inputWrapper}>
+            <FaBuilding className={styles.inputIcon} /> {/* You can choose another icon if you prefer */}
+            <input
+              type="text"
+              name="professorDepartment"
+              placeholder="Department"
+              value={professorFormData.professorDepartment || ""}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+
+          <div className={styles.inputWrapper}>
             <FaUniversity className={styles.inputIcon} />
             <input
               type="text"
               name="institutionName"
               placeholder="Institution Name"
               value={professorFormData.institutionName || ""}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className={styles.inputWrapper}>
+            <FaBriefcase className={styles.inputIcon} />
+            <input
+              type="text"
+              name="experience"
+              placeholder="Experience (in years)"
+              value={professorFormData.experience || ""}
               onChange={handleChange}
               required
             />
@@ -222,10 +350,10 @@ export default function Signup() {
             />
           </label>
 
-          {previewImage && (
+          {professorpreviewImage && (
             <div className={styles.previewContainer}>
               <img
-                src={previewImage}
+                src={professorpreviewImage}
                 alt="Preview"
                 className={styles.previewImage}
               />
@@ -253,6 +381,17 @@ export default function Signup() {
           </button>
         </form>
       </div>
+        <ResultPanel
+          show={showResultPanel}
+          message={resultMessage}
+          isSuccess={isSuccess}
+          onClose={() => {
+            setShowResultPanel(false); // Hide panel
+            if (isSuccess) {
+              navigate("/login"); // Go to login on success
+            }
+          }}
+        />
     </div>
   );
 }

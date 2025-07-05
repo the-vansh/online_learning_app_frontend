@@ -1,9 +1,16 @@
 import React from 'react'
-import styles from './NavigationBar.module.css'
+
+import { Link } from 'react-router-dom'
+import Logout from '../AuthenticationComponents/Logout'; // Import the Logout component
 export default function NavigationBar() {
   return (
-    <div>
-         <h3 className={styles.hcom}>Home</h3>
-    </div>
+   <>
+    <nav >
+        <Link to="/">Home</Link>
+        <Link to="/signup">Signup</Link>
+        <Link to="/login">Login</Link>
+    </nav>
+    <Logout/>
+   </>
   )
 }

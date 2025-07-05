@@ -1,0 +1,139 @@
+/* Background container */
+.loginContainer {
+  width: 100%;
+  max-width: 420px;
+  margin: 80px auto;
+  background: #fff7f0;
+  border-radius: 16px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  font-family: 'Poppins', sans-serif;
+  animation: fadeIn 0.6s ease;
+}
+
+/* Form styling */
+.loginForm {
+  padding: 30px 25px;
+  box-sizing: border-box;
+  background: #ffffff;
+}
+
+.loginForm h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #ff6f61;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+/* Input fields */
+.inputWrapper {
+  display: flex;
+  align-items: center;
+  margin: 15px 0;
+  background: #fff0e5;
+  border-radius: 8px;
+  padding: 12px;
+  transition: box-shadow 0.3s ease;
+}
+
+.inputWrapper:focus-within {
+  box-shadow: 0 0 0 3px rgba(255, 111, 97, 0.3);
+}
+
+.inputWrapper input {
+  width: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 15px;
+}
+
+/* Role radio buttons */
+.roleGroup {
+  display: flex;
+  justify-content: space-around;
+  margin: 15px 0;
+  color: #555;
+  font-weight: 500;
+}
+
+.roleGroup label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.roleGroup input[type="radio"] {
+  accent-color: #ff6f61;
+}
+
+/* Submit button */
+.loginButton {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(135deg, #ff6f61, #ff8c42);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.loginButton:hover {
+  background: linear-gradient(135deg, #e65c50, #e67330);
+  transform: scale(1.02);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .loginContainer {
+    max-width: 95%;
+    margin: 40px auto;
+  }
+
+  .loginForm h2 {
+    font-size: 20px;
+  }
+
+  .inputWrapper {
+    padding: 10px;
+  }
+
+  .loginButton {
+    font-size: 15px;
+    padding: 10px;
+  }
+}
+
+/* Spinner for button */
+.spinner {
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #fff;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  animation: spin 0.8s linear infinite;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

@@ -3,18 +3,20 @@
   width: 100%;
   max-width: 480px;
   margin: 60px auto;
-  background: #fefefe;
+  background: #fff7f0;
   border-radius: 16px;
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   font-family: 'Poppins', sans-serif;
   animation: fadeIn 0.6s ease;
 }
 
+
+
 /* Form toggle buttons */
 .formToggle {
   display: flex;
-  background: linear-gradient(to right, #4facfe, #00f2fe);
+  background: linear-gradient(to right, #ff7e5f, #feb47b);
 }
 
 .formToggle button {
@@ -35,9 +37,9 @@
 
 .formToggle button.active {
   background: #ffffff;
-  color: #0077b6;
+  color: #ff6f61;
   font-weight: 600;
-  border-bottom: 3px solid #0077b6;
+  border-bottom: 3px solid #ff6f61;
 }
 
 /* Sliding Form Animation */
@@ -62,7 +64,7 @@
 .signupForm h2 {
   text-align: center;
   margin-bottom: 25px;
-  color: #0077b6;
+  color: #ff6f61;
   font-size: 24px;
   font-weight: 600;
 }
@@ -72,18 +74,18 @@
   display: flex;
   align-items: center;
   margin: 12px 0;
-  background: #f1f5f9;
+  background: #fff0e5;
   border-radius: 8px;
   padding: 10px 12px;
   transition: box-shadow 0.3s ease;
 }
 
 .signupForm .inputWrapper:focus-within {
-  box-shadow: 0 0 0 3px rgba(0, 119, 182, 0.3);
+  box-shadow: 0 0 0 3px rgba(255, 111, 97, 0.3);
 }
 
 .signupForm .inputIcon {
-  color: #0077b6;
+  color: #ff6f61;
   margin-right: 8px;
 }
 
@@ -107,14 +109,14 @@
   display: block;
   width: 100%;
   padding: 10px;
-  border: 1px dashed #0077b6;
+  border: 1px dashed #ff6f61;
   border-radius: 8px;
-  background: #f0faff;
+  background: #fff0e5;
   cursor: pointer;
 }
 
 .fileInput:hover {
-  border-color: #00b4d8;
+  border-color: #ff8c42;
 }
 
 /* Image Preview */
@@ -126,17 +128,17 @@
 .previewImage {
   max-width: 100px;
   height: 100px;
-  border-radius: 50%;
+  border-radius: 10%;
   object-fit: cover;
-  border: 2px solid #0077b6;
-  box-shadow: 0 5px 10px rgba(0, 119, 182, 0.2);
+  border: 2px solid #ff6f61;
+  box-shadow: 0 5px 10px rgba(255, 111, 97, 0.2);
 }
 
 /* Submit Button */
 .signupForm button {
   width: 100%;
   padding: 12px;
-  background: linear-gradient(135deg, #0077b6, #00b4d8);
+  background: linear-gradient(135deg, #ff6f61, #ff8c42);
   color: #fff;
   border: none;
   border-radius: 8px;
@@ -147,12 +149,12 @@
 }
 
 .signupForm button:hover {
-  background: linear-gradient(135deg, #005f8c, #0096c7);
+  background: linear-gradient(135deg, #e65c50, #e67330);
   transform: scale(1.02);
 }
 
 .signupForm button:disabled {
-  background: #b0c4de;
+  background: #f5c6b8;
   cursor: not-allowed;
 }
 
@@ -214,4 +216,27 @@
     font-size: 14px;
     padding: 10px 0;
   }
+}
+
+
+.profileTip {
+  background-color: #fff0e5; /* Light peach for warm vibe */
+  color: #ff6f61; /* Sunset coral for text */
+  border-left: 4px solid #ff8c42; /* Accent bar in orange */
+  padding: 10px 15px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 2px 6px rgba(255, 111, 97, 0.1);
+  transition: background-color 0.3s ease;
+}
+
+.profileTip:hover {
+  background-color: #ffe5d0; /* Slightly darker peach on hover */
+  cursor: default;
 }
