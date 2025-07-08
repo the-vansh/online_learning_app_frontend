@@ -16,9 +16,9 @@ function App() {
         <Route path="/" element={<h1>Welcome to the Online Learning App</h1>} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login/>}/>
-        <Route path="/dashboard/learner" element={<ProtectedRoute><LearnerDashboard/></ProtectedRoute>} />
-        <Route path="/dashboard/professor" element={<ProtectedRoute><ProfessorDashboard /></ProtectedRoute>} />
-        <Route path="/dashboard/admin" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
+        <Route path="/grantaccess/learner" element={<ProtectedRoute><LearnerDashboard/></ProtectedRoute>} />
+        <Route path="/grantaccess/professor" element={<ProtectedRoute><ProfessorDashboard /></ProtectedRoute>} />
+        <Route path="/grantaccess/admin" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
       </Routes>
     </BrowserRouter>
     </>

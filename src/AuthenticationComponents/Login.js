@@ -142,7 +142,7 @@ export default function Login() {
           onClose={() => {
             setShowResultPanel(false); // Hide panel
             if (isSuccess) {
-              navigate(`/dashboard/${role}`); // Go to login on success
+              navigate(`/grantaccess/${role}`); // Go to login on success
             }
           }}
         />

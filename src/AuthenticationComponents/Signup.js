@@ -73,7 +73,7 @@ export default function Signup() {
       formData.learnerImageUrl = imageUrl;
     } else {
       formData.professorImageUrl = imageUrl;
-      formData.status="Pending";
+      formData.status="Not Approved";
     }
     delete formData.profileImage;
     
