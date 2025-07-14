@@ -56,13 +56,13 @@ export default function Signup() {
   const handleSubmit = async(e) => {
     e.preventDefault();
     setLoading(true);
-    let imageUrl = ""; 
+    var responsefromcloud="";
     let formData =
       activeForm === "learner" ? { ...learnerFormData } : { ...professorFormData };
 
     try {
-      imageUrl = await uploadToCloudinary(formData.profileImage, "image");
-      console.log("Image uploaded:", imageUrl);
+      responsefromcloud = await uploadToCloudinary(formData.profileImage, "image");
+      console.log("Image uploaded:", responsefromcloud.secureUrl);
     } catch (error) {
       console.error("Cloudinary upload failed:", error);
       alert("Server Error Please try again later.");
@@ -70,9 +70,11 @@ export default function Signup() {
       return;
     }
     if (activeForm === "learner") {
-      formData.learnerImageUrl = imageUrl;
+      formData.learnerImageUrl = responsefromcloud.secureUrl;
+      formData.learnerPublicId = responsefromcloud.publicId;
     } else {
-      formData.professorImageUrl = imageUrl;
+      formData.professorImageUrl = responsefromcloud.secureUrl;
+      formData.professorPublicId = responsefromcloud.publicId;
       formData.status="Not Approved";
     }
     delete formData.profileImage;

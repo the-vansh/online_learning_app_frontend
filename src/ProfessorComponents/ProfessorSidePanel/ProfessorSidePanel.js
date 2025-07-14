@@ -10,7 +10,7 @@ export default function ProfessorSidePanel({setActiveTab}) {
           <FaPlusCircle /> Add Course
         </div>
         <div onClick={() => setActiveTab("AllCourses")}>
-          <FaBook /> All Courses
+          <FaBook /> My Courses
         </div>
         <div onClick={() => setActiveTab("learners")}>
           <FaUsers /> Learners

@@ -74,6 +74,7 @@ export default function Learner() {
           learnerCourse={enrollment.course.courseName}
           enrollmentDate={enrollment.enrollmentDate} // Enrollment date
           status={enrollment.status}
+          buttonAvailable={"true"}
           buttonlabel="delete" // Button label
           handleBtnFunction={handleDeleteBtn}// Function to handle delete action
         />

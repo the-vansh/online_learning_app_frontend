@@ -3,6 +3,7 @@ import api from '../../CenteralApiHandler/Api'
 import ResultPanel from '../../SharedComponents/ResultPanel';
 import CourseCard from '../../SharedComponents/CourseCard';
 
+
 export default function Courses() {
   const [allcourses,setAllCourses] = useState([]);
   const [error,setError] = useState("");

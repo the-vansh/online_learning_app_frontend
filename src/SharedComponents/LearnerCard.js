@@ -8,6 +8,7 @@ export default function LearnerCard({
     learnerCourse,
     enrollmentDate,
     status,
+    buttonAvailable=false,
     buttonlabel, 
     handleBtnFunction
 }) {
@@ -23,7 +24,9 @@ export default function LearnerCard({
         <p><strong>Enrollment Date:</strong>{new Date(enrollmentDate).toLocaleDateString()}</p>
         <p><strong>Status:</strong>{status}</p>
       </div>
+      {buttonAvailable &&
       <button onClick={() => handleBtnFunction(learnerUsername)}>{buttonlabel}</button>
+      }
     </div>
   );
 }

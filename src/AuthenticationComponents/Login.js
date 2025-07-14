@@ -15,6 +15,7 @@ export default function Login() {
   const [resultMessage, setResultMessage] = useState(""); // Success/error text
   const [isSuccess, setIsSuccess] = useState(false);
   const [role, setRole] = useState(""); // Default role
+  const [loginUsername,setLoginUsername]=useState("");
   const navigate = useNavigate(); // Initialize useNavigat
 
 
@@ -35,6 +36,8 @@ export default function Login() {
       localStorage.setItem("role", response.data.role);
       setRole(response.data.role); // Set the role from response
       // Show success message
+      setLoginUsername(response.data.Username);
+      //console.log(response.data.Username);
       setResultMessage("Login successful!");
       setIsSuccess(true);
       setShowResultPanel(true);
@@ -142,7 +145,9 @@ export default function Login() {
           onClose={() => {
             setShowResultPanel(false); // Hide panel
             if (isSuccess) {
-              navigate(`/grantaccess/${role}`); // Go to login on success
+              navigate(`/grantaccess/${role}`,{
+                state:{LoggedInUsername:loginUsername}
+              }); // Go to login on success
             }
           }}
         />

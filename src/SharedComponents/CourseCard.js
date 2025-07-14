@@ -14,7 +14,11 @@ export default function CourseCard({courseId,
     professorInstitute,
     experience,
     buttonlabel,
-    handleBtnFunction
+    handleBtnFunction,
+    showAddChapterBtn = false, 
+    handleAddChapterBtn,
+    showVeiwAllChapterBtn=false,
+    handleViewAllChapterBtn
 }) {
   return (
     <div>
@@ -31,6 +35,14 @@ export default function CourseCard({courseId,
         <p><strong>By:</strong>{professornName}<strong>From</strong>{professorInstitute}<strong>And Experience</strong>{experience}</p>
       </div>
       <button onClick={() => handleBtnFunction(courseId)}>{buttonlabel}</button>
+
+      {showAddChapterBtn && (
+        <button onClick={() => handleAddChapterBtn(courseId)}>Add Chapter</button>
+      )}
+
+      {showVeiwAllChapterBtn && (
+        <button onClick={()=>handleViewAllChapterBtn(courseId)}>VeiwAllChapter</button>
+      )}
     </div>
   )
 }
